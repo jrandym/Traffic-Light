@@ -1,7 +1,26 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
-    String state = "green"; //
+    private static final int LIGHT_X = 510;
+    private static final int RED_LIGHT_Y = 55;
+    private static final int LIGHT_SPACING = 60;
+    private static final int YELLOW_LIGHT_Y = RED_LIGHT_Y + LIGHT_SPACING;
+    private static final int GREEN_LIGHT_Y = YELLOW_LIGHT_Y + LIGHT_SPACING;
+    private static final int LIGHT_DIAMETER = 50;
+    private static final int LIGHT_RADIUS = LIGHT_DIAMETER / 2;
+    private static final int LIGHT_BOX_TOP = 20;
+    private static final int LIGHT_BOX_WIDTH = 70;
+    private static final int LIGHT_BOX_HEIGHT = 190;
+    private static final int LIGHT_BOX_CORNER_RADIUS = 10;
+    private static final int LIGHT_POLE_WIDTH = 10;
+    private static final int LIGHT_POLE_TOP = LIGHT_BOX_TOP + LIGHT_BOX_HEIGHT;
+    private static final int LIGHT_POLE_HEIGHT = 90;
+
+    private static final String RED = "red";
+    private static final String YELLOW = "yellow";
+    private static final String GREEN = "green";
+
+    String state = GREEN;
     float carX = 40;
 
     public void settings() {
@@ -28,32 +47,34 @@ public class Sketch extends PApplet {
     public void drawLight() {
         stroke(0);
         fill(60);
-        rect(505, 210, 10, 90);       // pole
-        rect(475, 20, 70, 190, 10);   // box
+        rect(LIGHT_X - LIGHT_POLE_WIDTH / 2, LIGHT_POLE_TOP,
+                LIGHT_POLE_WIDTH, LIGHT_POLE_HEIGHT); // pole
+        rect(LIGHT_X - LIGHT_BOX_WIDTH / 2, LIGHT_BOX_TOP,
+                LIGHT_BOX_WIDTH, LIGHT_BOX_HEIGHT, LIGHT_BOX_CORNER_RADIUS); // box
 
         // red
-        if (state.equals("red")) { 
+        if (state.equals(RED)) {
             fill(230, 40, 40); 
         } else { 
             fill(90, 30, 30); 
         }
-        ellipse(510, 55, 50, 50);
+        ellipse(LIGHT_X, RED_LIGHT_Y, LIGHT_DIAMETER, LIGHT_DIAMETER);
 
         // yellow
-        if (state.equals("yellow")) { 
+        if (state.equals(YELLOW)) {
             fill(250, 210, 40); 
         } else { 
             fill(90, 80, 20); 
         }
-        ellipse(510, 115, 50, 50);
+        ellipse(LIGHT_X, YELLOW_LIGHT_Y, LIGHT_DIAMETER, LIGHT_DIAMETER);
 
         // green
-        if (state.equals("green")) { 
+        if (state.equals(GREEN)) {
             fill(60, 200, 80); 
         } else { 
             fill(25, 75, 35); 
         }
-        ellipse(510, 175, 50, 50);
+        ellipse(LIGHT_X, GREEN_LIGHT_Y, LIGHT_DIAMETER, LIGHT_DIAMETER);
     }
 
     public void drawCar(float x, float y) {
@@ -68,19 +89,19 @@ public class Sketch extends PApplet {
 
     public void mousePressed() {
         // Check if the mouse was pressed on the red light
-        double d = calculateDistance(mouseX, mouseY, 510, 55);
-        if (d <= 25) {
-            state = "red";
+        double d = calculateDistance(mouseX, mouseY, LIGHT_X, RED_LIGHT_Y);
+        if (d <= LIGHT_RADIUS) {
+            state = RED;
         }
         // Check if the mouse was pressed on the yellow light
-        d = calculateDistance(mouseX, mouseY, 510, 115);
-        if (d <= 25) {
-            state = "yellow";
+        d = calculateDistance(mouseX, mouseY, LIGHT_X, YELLOW_LIGHT_Y);
+        if (d <= LIGHT_RADIUS) {
+            state = YELLOW;
         }
         // Check if the mouse was pressed on the green light
-        d = calculateDistance(mouseX, mouseY, 510, 175);
-        if (d <= 25) {
-            state = "green";
+        d = calculateDistance(mouseX, mouseY, LIGHT_X, GREEN_LIGHT_Y);
+        if (d <= LIGHT_RADIUS) {
+            state = GREEN;
         }
 
     }
