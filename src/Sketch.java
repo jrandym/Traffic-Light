@@ -67,10 +67,22 @@ public class Sketch extends PApplet {
     }
 
     public void mousePressed() {
+        // Check if the mouse was pressed on the red light
         double d = calculateDistance(mouseX, mouseY, 510, 55);
         if (d <= 25) {
             state = "red";
         }
+        // Check if the mouse was pressed on the yellow light
+        d = calculateDistance(mouseX, mouseY, 510, 115);
+        if (d <= 25) {
+            state = "yellow";
+        }
+        // Check if the mouse was pressed on the green light
+        d = calculateDistance(mouseX, mouseY, 510, 175);
+        if (d <= 25) {
+            state = "green";
+        }
+
     }
 
     public double calculateDistance(int x1, int y1, int x2, int y2) {
