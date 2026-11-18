@@ -6,3 +6,7 @@
 4. Make: Drive on green, slow on yellow, stop on red.
 
 5. Bonus: Wrap the car around the screen.
+## Extensions
+1. **Timer**: Create a timer which changes the traffic lights on a schedule
+2. **Environment**: Change the scene on a day/night schedule
+3. 
