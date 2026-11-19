@@ -20,15 +20,26 @@ public class Sketch extends PApplet {
     private static final String YELLOW = "yellow";
     private static final String GREEN = "green";
 
-    String state = GREEN;
-    float carX = 40;
+    // Initial state variables of the traffic light
+    String state; // 
+    float carX; // X-coordinate of the car
+    int skyBlue; // Color variable for the sky background
 
+    // The main method is the entry point of the program
     public void settings() {
         size(600, 400);
     }
 
+    // The setup method is called once when the program starts
+    public void setup() {
+        state = GREEN;
+        carX = 40;
+        skyBlue = color(185, 220, 250);
+    }
+
+    // The draw method is called repeatedly to render the scene
     public void draw() {
-        background(185, 220, 250);
+        background(skyBlue);
         drawRoad();
         drawLight();
         drawCar(carX, 305);
