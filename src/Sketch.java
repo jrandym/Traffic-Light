@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
+    // Constants for the traffic light position and size
     private static final int LIGHT_X = 510;
     private static final int RED_LIGHT_Y = 55;
     private static final int LIGHT_SPACING = 60;
@@ -15,6 +16,23 @@ public class Sketch extends PApplet {
     private static final int LIGHT_POLE_WIDTH = 10;
     private static final int LIGHT_POLE_TOP = LIGHT_BOX_TOP + LIGHT_BOX_HEIGHT;
     private static final int LIGHT_POLE_HEIGHT = 90;
+    // Constants for the car dimensions and colors
+    private static final int CAR_ROOF_OFFSET_X = 25;
+    private static final int CAR_ROOF_OFFSET_Y = -25;
+    private static final int CAR_ROOF_WIDTH = 65;
+    private static final int CAR_ROOF_HEIGHT = 30;
+    private static final int CAR_BODY_WIDTH = 120;
+    private static final int CAR_BODY_HEIGHT = 35;
+    private static final int CAR_CORNER_RADIUS = 8;
+    private static final int CAR_WHEEL_BACK_OFFSET_X = 25;
+    private static final int CAR_WHEEL_FRONT_OFFSET_X = 95;
+    private static final int CAR_WHEEL_OFFSET_Y = 35;
+    private static final int CAR_WHEEL_DIAMETER = 28;
+    private static final int CAR_OUTLINE_COLOR = 0;
+    private static final int CAR_RED = 30;
+    private static final int CAR_GREEN = 90;
+    private static final int CAR_BLUE = 200;
+    private static final int CAR_WHEEL_COLOR = 20;
     // Constants for the traffic light colors
     private static final String RED = "red";
     private static final String YELLOW = "yellow";
@@ -23,6 +41,7 @@ public class Sketch extends PApplet {
     // Initial state variables of the traffic light
     String state; // The current state of the traffic light
     float carX; // X-coordinate of the car
+    float carY; // Y-coordinate of the car
     int skyBlue; // Color variable for the sky background
     int redOn, redOff, yellowOn, yellowOff, greenOn, greenOff; // Traffic light colors
 
@@ -122,13 +141,16 @@ public class Sketch extends PApplet {
     }
 
     public void drawCar(float x, float y) {
-        stroke(0);
-        fill(30, 90, 200);
-        rect(x + 25, y - 25, 65, 30, 8);   // roof
-        rect(x, y, 120, 35, 8);            // body
-        fill(20);
-        ellipse(x + 25, y + 35, 28, 28);   // back wheel
-        ellipse(x + 95, y + 35, 28, 28);   // front wheel
+        stroke(CAR_OUTLINE_COLOR);
+        fill(CAR_RED, CAR_GREEN, CAR_BLUE);
+        rect(x + CAR_ROOF_OFFSET_X, y + CAR_ROOF_OFFSET_Y,
+            CAR_ROOF_WIDTH, CAR_ROOF_HEIGHT, CAR_CORNER_RADIUS); // roof
+        rect(x, y, CAR_BODY_WIDTH, CAR_BODY_HEIGHT, CAR_CORNER_RADIUS); // body
+        fill(CAR_WHEEL_COLOR); // wheels
+        ellipse(x + CAR_WHEEL_BACK_OFFSET_X, y + CAR_WHEEL_OFFSET_Y,
+            CAR_WHEEL_DIAMETER, CAR_WHEEL_DIAMETER); // back wheel
+        ellipse(x + CAR_WHEEL_FRONT_OFFSET_X, y + CAR_WHEEL_OFFSET_Y,
+            CAR_WHEEL_DIAMETER, CAR_WHEEL_DIAMETER); // front wheel
     }
 
     public void mousePressed() {
