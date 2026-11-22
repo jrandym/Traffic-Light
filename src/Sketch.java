@@ -15,15 +15,16 @@ public class Sketch extends PApplet {
     private static final int LIGHT_POLE_WIDTH = 10;
     private static final int LIGHT_POLE_TOP = LIGHT_BOX_TOP + LIGHT_BOX_HEIGHT;
     private static final int LIGHT_POLE_HEIGHT = 90;
-
+    // Constants for the traffic light colors
     private static final String RED = "red";
     private static final String YELLOW = "yellow";
     private static final String GREEN = "green";
 
     // Initial state variables of the traffic light
-    String state; // 
+    String state; // The current state of the traffic light
     float carX; // X-coordinate of the car
     int skyBlue; // Color variable for the sky background
+    int redOn, redOff, yellowOn, yellowOff, greenOn, greenOff; // Traffic light colors
 
     // The main method is the entry point of the program
     public void settings() {
@@ -32,9 +33,16 @@ public class Sketch extends PApplet {
 
     // The setup method is called once when the program starts
     public void setup() {
-        state = GREEN;
         carX = 40;
         skyBlue = color(185, 220, 250);
+        state = GREEN;
+        
+        redOn = color(230, 40, 40);
+        redOff = color(90, 30, 30);
+        yellowOn = color(250, 210, 40);
+        yellowOff = color(90, 80, 20);
+        greenOn = color(60, 200, 80);
+        greenOff = color(25, 75, 35);
     }
 
     // The draw method is called repeatedly to render the scene
@@ -65,25 +73,25 @@ public class Sketch extends PApplet {
 
         // red
         if (state.equals(RED)) {
-            fill(230, 40, 40); 
+            fill(redOn); 
         } else { 
-            fill(90, 30, 30); 
+            fill(redOff); 
         }
         ellipse(LIGHT_X, RED_LIGHT_Y, LIGHT_DIAMETER, LIGHT_DIAMETER);
 
         // yellow
         if (state.equals(YELLOW)) {
-            fill(250, 210, 40); 
+            fill(yellowOn); 
         } else { 
-            fill(90, 80, 20); 
+            fill(yellowOff); 
         }
         ellipse(LIGHT_X, YELLOW_LIGHT_Y, LIGHT_DIAMETER, LIGHT_DIAMETER);
 
         // green
         if (state.equals(GREEN)) {
-            fill(60, 200, 80); 
+            fill(greenOn); 
         } else { 
-            fill(25, 75, 35); 
+            fill(greenOff); 
         }
         ellipse(LIGHT_X, GREEN_LIGHT_Y, LIGHT_DIAMETER, LIGHT_DIAMETER);
     }
@@ -117,7 +125,18 @@ public class Sketch extends PApplet {
 
     }
 
+    /*
+     * Custom functions below 
+     */
+
+    // Custom method to calculate the distance between two points
     public double calculateDistance(int x1, int y1, int x2, int y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
+
+    // set lights on
+    public void setLight(String color) {
+        state = color;
+    }
+
 }
