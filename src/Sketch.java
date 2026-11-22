@@ -50,6 +50,31 @@ public class Sketch extends PApplet {
         background(skyBlue);
         drawRoad();
         drawLight();
+        // Put the light on a timer to change automatically after a certain period
+        // This is a simple implementation and can be improved with more complex logic
+        // For example, you could use a counter to track the time and change the state accordingly
+        // For now, we'll just change the state every 3 seconds
+        if (frameCount % 180 == 0) {
+            if (state.equals(GREEN)) {
+                state = YELLOW;
+            } else if (state.equals(YELLOW)) {
+                state = RED;
+            } else if (state.equals(RED)) {
+                state = GREEN;
+            }
+        }
+        // Update the car's position based on the traffic light state
+        // when carX exceeds the width of the canvas, reset it to the starting position
+        if (carX > width) {
+            carX = -120;
+        }
+        if (state.equals(GREEN)) {
+            carX += 2; // Move the car to the right
+        } else if (state.equals(YELLOW)) {
+            carX += 1; // Move the car slowly
+        } else if (state.equals(RED)) {
+            carX = carX; // Stop the car
+        }
         drawCar(carX, 305);
     }
 
