@@ -97,6 +97,7 @@ public class Sketch extends PApplet {
         drawCar(carX, 305);
     }
 
+    // Draw the road with a yellow dashed line in the middle
     public void drawRoad() {
         noStroke();
         fill(70);
@@ -107,6 +108,7 @@ public class Sketch extends PApplet {
         }
     }
 
+    // Draw the traffic light with the current state
     public void drawLight() {
         stroke(0);
         fill(60);
@@ -140,6 +142,7 @@ public class Sketch extends PApplet {
         ellipse(LIGHT_X, GREEN_LIGHT_Y, LIGHT_DIAMETER, LIGHT_DIAMETER);
     }
 
+    // Draw a car at the given position
     public void drawCar(float x, float y) {
         stroke(CAR_OUTLINE_COLOR);
         fill(CAR_RED, CAR_GREEN, CAR_BLUE);
@@ -153,6 +156,7 @@ public class Sketch extends PApplet {
             CAR_WHEEL_DIAMETER, CAR_WHEEL_DIAMETER); // front wheel
     }
 
+    // Handle mouse press events to change the traffic light state
     public void mousePressed() {
         // Check if the mouse was pressed on the red light
         double d = calculateDistance(mouseX, mouseY, LIGHT_X, RED_LIGHT_Y);
